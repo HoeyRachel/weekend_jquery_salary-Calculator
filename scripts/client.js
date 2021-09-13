@@ -17,7 +17,16 @@ function getData (){
         JobTitle : $(`#JobTitle`).val(),
         AnnualSalary : $(`#AnnualSalary`).val(),
     }//end newEntry
-    //push item into an array
+    //store information - do I need an array if I store it in a table?
     employees.push(newEntry);
-
+    //append information to the DOM
+    let row = "<th>" + $(`#firstName`).val(); + "<th>" + $(`#lastName`).val(); + "<th>" + 
+    $(`#IDNumber`).val(); + "<th>" + $(`#JobTitle`).val(); + "<th>" + $(`AnnualSalary`).val(); + "</th>";
+    $("table tbody").append (row);
 }
+
+
+
+
+
+  
