@@ -1,11 +1,13 @@
 $(document).ready (onReady);
+let employees = [];
 
 function onReady() {
     console.log ('in onReady');
     $(`#submitButton`).on (`click`, getData);
+    $( '#employeesOut' ).on( 'click', '.deleteEmployee', deleteEmployee );
 } //end onReady
 
-let employees = [];
+
 
 function getData (){
     console.log('in getData');
@@ -17,16 +19,31 @@ function getData (){
         JobTitle : $(`#JobTitle`).val(),
         AnnualSalary : $(`#AnnualSalary`).val(),
     }//end newEntry
-    //store information - do I need an array if I store information in a table?
+    //store information 
     employees.push(newEntry);
     //append information to the DOM
-    let row = "<th>" + $(`#firstName`).val(); + "<th>" + $(`#lastName`).val(); + "<th>" + 
-    $(`#IDNumber`).val(); + "<th>" + $(`#JobTitle`).val(); + "<th>" + $(`AnnualSalary`).val(); + "</th>";
-    $("table tbody").append (row);
+    let el = $('#employeesOut')
+    el.empty ();
+    for (i=0; i<employees.length; i++){
+        el.append( `<th>${ employees[i].firstName }, ${ employees[i].lastName}, ${ employees[i].IDNumber},
+         ${ employees[i].JobTitle }, ${ employees[i].AnnualSalary}
+         <button class="deleteEmployee">Delete</button>
+         </th>` );
+        
+    }
+    // let row = "<th>" + $(`#firstName`).val(); + "<th>" + $(`#lastName`).val(); + "<th>" + 
+    // $(`#IDNumber`).val(); + "<th>" + $(`#JobTitle`).val(); + "<th>" + $(`AnnualSalary`).val(); + "</th>";
+    // $("table tbody").append (row);
+    
 }
 
 
 
+function deleteEmployee(){
+    console.log( 'in deleteEmployee' );
+    //remove employee
+    $( this ).parent().remove(); 
+} // end deleteEmployee
 
 
   
