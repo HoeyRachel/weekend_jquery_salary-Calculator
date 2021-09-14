@@ -1,12 +1,13 @@
 $(document).ready (onReady);
+
 let employees = [];
+
 
 function onReady() {
     console.log ('in onReady');
     $(`#submitButton`).on (`click`, getData);
-    $( '#employeesOut' ).on( 'click', '.deleteEmployee', deleteEmployee );
+    $( '#employeeTable' ).on( 'click', '.deleteEmployee', deleteEmployee );
 } //end onReady
-
 
 
 function getData (){
@@ -22,19 +23,35 @@ function getData (){
     //store information 
     employees.push(newEntry);
     //append information to the DOM
-    let el = $('#employeesOut')
+    let el = $('#employeeTable')
     el.empty ();
+    el.append (`<tr id = "row">
+            <th id = "FirstName">First Name</th>
+            <th id = "LastName">Last Name</th>
+            <th id = "IDNumber">ID Number</th>
+            <th id = "JobTitle">Job Title</th>
+            <th id = "AnnualSalary">Annual Salary</th>
+            <th id = "Delete"></th>
+        </tr>`)
     for (i=0; i<employees.length; i++){
-        el.append( `<th>${ employees[i].firstName }, ${ employees[i].lastName}, ${ employees[i].IDNumber},
-         ${ employees[i].JobTitle }, ${ employees[i].AnnualSalary}
-         <button class="deleteEmployee">Delete</button>
-         </th>` );
+        el.append( `<tr><td>${ employees[i].firstName }</td>, <td>${ employees[i].lastName}</td>,  <td>${ employees[i].IDNumber}</td>,
+         <td>${ employees[i].JobTitle }</td>, <td>${ employees[i].AnnualSalary}</td>
+         <td><button class="deleteEmployee">Delete</button>
+         </td></tr>` );
+
+    } 
+    let monthlyWages=0;
+    let sum = 0;
+    for (i=0; i<employees.length; i++){
+        monthlyWages = (sum +=Number(employees[i].AnnualSalary))/12;
         
     }
-    // let row = "<th>" + $(`#firstName`).val(); + "<th>" + $(`#lastName`).val(); + "<th>" + 
-    // $(`#IDNumber`).val(); + "<th>" + $(`#JobTitle`).val(); + "<th>" + $(`AnnualSalary`).val(); + "</th>";
-    // $("table tbody").append (row);
-    
+    el.append (monthlyWages);
+    $(`#firstName`).val('');
+    $(`#lastName`).val('');
+    $(`#IDNumber`).val('');
+    $(`#JobTitle`).val('');
+    $(`#AnnualSalary`).val('');
 }
 
 
@@ -42,8 +59,16 @@ function getData (){
 function deleteEmployee(){
     console.log( 'in deleteEmployee' );
     //remove employee
-    $( this ).parent().remove(); 
+    $( this ).parent().parent().remove(); 
 } // end deleteEmployee
 
 
-  
+function salaryCalculator(){
+    console.log ('in salary calculator')
+    if (monthlyWages>20,000){
+        $(this).parent().toggleClass ( 'red');
+    }
+    else{
+
+    }
+}  

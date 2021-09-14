@@ -7,7 +7,15 @@ table, th, td {
     padding: 5px;
   }
 
-table {
+ table {
     width: 100%;
+   }
+
+   tr:nth-child(even) {
+       background-color: lightgray;
+   }
+
+.red{
+    background-color: red;
 }
 
