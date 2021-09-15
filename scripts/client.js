@@ -44,17 +44,21 @@ function getData (){
     let sum = 0;
     for (i=0; i<employees.length; i++){
         monthlyWages = (sum +=Number(employees[i].AnnualSalary))/12;
-        
-    }
+        if (monthlyWages>20000){
+            $(`#salaryCalculator`).toggleClass ( 'red');
+        }
+    } 
+    
     el.append (monthlyWages);
-    $(`#firstName`).val('');
-    $(`#lastName`).val('');
+    $(`#FirstName`).val('');
+    $(`#LastName`).val('');
     $(`#IDNumber`).val('');
     $(`#JobTitle`).val('');
     $(`#AnnualSalary`).val('');
+    $(`#salaryCalculator`).val('');
+    
+    
 }
-
-
 
 function deleteEmployee(){
     console.log( 'in deleteEmployee' );
@@ -63,12 +67,4 @@ function deleteEmployee(){
 } // end deleteEmployee
 
 
-function salaryCalculator(){
-    console.log ('in salary calculator')
-    if (monthlyWages>20,000){
-        $(this).parent().toggleClass ( 'red');
-    }
-    else{
 
-    }
-}  
